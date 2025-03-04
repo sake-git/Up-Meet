@@ -1,0 +1,49 @@
+<div class="form-container-center">
+  <form #loginForm="ngForm" (ngSubmit)="userLogin(loginForm)">
+    <Fieldset>
+      <legend>Login Form</legend>
+      <div>
+        <label><span class="required">*</span>Login Id</label>
+        <input
+          type="text"
+          [(ngModel)]="user.loginId"
+          name="loginId"
+          #loginId="ngModel"
+          required
+        />
+      </div>
+      <div>
+        <label><span class="required">*</span>Password</label>
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          name="password"
+          #password="ngModel"
+          required
+        />
+      </div>
+      <p
+        class="errors"
+        *ngIf="
+            (loginId.touched ) && loginId.errors?.['required']
+          "
+      >
+        Login Id is required
+      </p>
+      <p
+        class="errors"
+        *ngIf="
+            (password.touched ) && password.errors?.['required']
+          "
+      >
+        Password is required
+      </p>
+      <p *ngIf="errorMessage" class="errors">
+        {{ errorMessage }}
+      </p>
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
+      <button type="button" (click)="Cancel(loginForm)">Cancel</button>
+      <p>Not a registered user? <a routerLink="/signup">Sign up now</a></p>
+    </Fieldset>
+  </form>
+</div>

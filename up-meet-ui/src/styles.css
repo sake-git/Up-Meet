@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+  padding: 10px;
+}
+
+body {
+  background-image: url("https://www.lehighcenter.com/wp-content/uploads/2018/05/social-media-axiety.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+
+label,
+input,
+button,
+textarea {
+  margin: 5px;
+  padding: 5px;
+  resize: none;
+}
+
+form {
+  width: 400px;
+  display: inline-block;
+  padding: 10px;
+  background-color: rgb(119, 160, 170);
+  margin: auto;
+}
+
+form div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.errors {
+  font-size: small;
+  color: red;
+  padding: 2px;
+}
+
+.form-container-center {
+  height: 60vh;
+  width: 100vw;
+  text-align: center;
+  border-top: 2px solid black;
+  display: flex;
+}
+
+.required {
+  color: red;
+  font-size: small;
+}

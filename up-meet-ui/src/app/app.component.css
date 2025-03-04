@@ -1,0 +1,6 @@
+container {
+  background-image: url("https://www.lehighcenter.com/wp-content/uploads/2018/05/social-media-axiety.jpg");
+  background-size: cover;
+
+  overflow: auto;
+}

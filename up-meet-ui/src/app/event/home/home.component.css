@@ -1,0 +1,14 @@
+a {
+  margin: 10px;
+  padding: 5px;
+}
+
+a:hover {
+  background-color: rgb(119, 160, 170);
+  border-radius: 15px;
+}
+.active {
+  background-color: rgb(81, 120, 143);
+  border-radius: 15px;
+  color: black;
+}
