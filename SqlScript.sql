@@ -1,0 +1,32 @@
+CREATE DATABASE EventDB;
+GO
+Use EventDB;
+
+CREATE TABLE Users(
+Id INT PRIMARY KEY IDENTITY(1,1),
+LoginId varchar(50) NOT NULL,
+Password binary(32) NOT NULL,
+Name varchar(100),
+Email varchar (100) NOT NULL,
+Phone varchar(15)
+);
+
+CREATE TABLE Events(
+Id INT PRIMARY KEY IDENTITY(1,1),
+Name VARCHAR(100) NOT NULL,
+Location VARCHAR(50),
+EventDateTime DATETIME,
+ImgUrl VARCHAR(250),
+Description VARCHAR(800),
+Price DECIMAL(6,2),
+KidsAllowed BIT,
+Duration INT,
+CreatedBy INT FOREIGN KEY REFERENCES Users(Id) NOT NULL,
+CreatedDate DATETIME
+);
+
+CREATE TABLE FavouriteEvents(
+ID INT PRIMARY KEY IDENTITY(1,1),
+UserId INT FOREIGN KEY REFERENCES Users(Id) NOT NULL,
+EventId INT FOREIGN KEY REFERENCES Events(Id) NOT NULL,
+);
