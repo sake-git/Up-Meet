@@ -1,0 +1,6 @@
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.csproj.AssemblyReference.cache
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.AssemblyInfoInputs.cache
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.AssemblyInfo.cs
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.csproj.CoreCompileInputs.cache
+C:\Users\gromp\OneDrive\Desktop\Up-Meet-main\Up-Meet-main\up-meet-api\obj\Debug\net6.0\up-meet-api.MvcApplicationPartsAssemblyInfo.cache
