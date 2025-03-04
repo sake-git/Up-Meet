@@ -30,7 +30,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.user = history.state;
     console.log('in home', this.user);
-    this.router.navigateByUrl('/home/event-list', { state: this.user });
+    this.router.navigateByUrl('/home/list-event', { state: this.user });
   }
 
   Logout() {

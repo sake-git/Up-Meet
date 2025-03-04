@@ -1,1 +1,15 @@
-<p>favourite-events works!</p>
+<div class="card-container">
+  <div
+    class="card"
+    *ngFor="let event of events"
+    [routerLink]="'display-event/' + event.id"
+    [state]="user"
+  >
+    <img [src]="event.imgUrl" />
+    <p>{{ event.name }}</p>
+    <p>{{ event.location }}</p>
+    <p>
+      {{ event.eventDateTime | date : "MMM d, yyyy hh:mm a" }}
+    </p>
+  </div>
+</div>

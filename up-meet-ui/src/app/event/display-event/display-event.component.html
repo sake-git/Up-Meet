@@ -1,1 +1,82 @@
-<p>display-event works!</p>
+<div class="container">
+  <div class="main">
+    <h2>{{ userEvent.name }}</h2>
+
+    <div class="display-flex">
+      <div>
+        <img [src]="userEvent.imgUrl" />
+        <span
+          (click)="UpdateFavorite()"
+          class="heart"
+          [ngClass]="{ favourite: userEvent.isFavourite }"
+          title="Add to favourite"
+        ></span>
+        <p class="bold-text">Details:</p>
+        <p>{{ userEvent.description }}</p>
+        <p>
+          <span class="bold-text"> Duration: </span>
+          {{ userEvent.duration }} mins
+        </p>
+        <p class="bold-text" *ngIf="!userEvent.kidsAllowed">
+          Age Restriction: 18+
+        </p>
+        <p>
+          <span class="bold-text"> Entry charges: </span>
+          {{ userEvent.price | currency : "USD" }}
+        </p>
+        <a
+          target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u={{
+            currentlink
+          }}&amp;src=sdkpreparse"
+          ><img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBILdC5ouxGYjeaYJPmVqMsSpsItocXSI5A&s"
+            alt="fb"
+            title="Share event on Facebook"
+            class="logo"
+        /></a>
+        <a
+          href="https://twitter.com/intent/tweet?text=Check this out{{
+            currentlink
+          }}"
+          target="_blank"
+          ><img
+            src="https://i0.wp.com/static01.nyt.com/images/2014/08/10/magazine/10wmt/10wmt-superJumbo-v4.jpg?ssl=1"
+            alt="tweet"
+            title="Share event on Twitter"
+            class="logo"
+        /></a>
+        <a href="https://www.ticketmaster.com/" target="_blank">
+          <button>Book</button></a
+        >
+      </div>
+      <div>
+        <p><span class="bold-text">Location:</span> {{ userEvent.location }}</p>
+        <p>
+          <span class="bold-text">Date and Time:</span
+          >{{ userEvent.eventDateTime | date : "MMM d, yyyy hh:mm a" }}
+        </p>
+        <div>
+          <iframe
+            width="300px"
+            height="300px"
+            [src]="url"
+            class="e2e-trusted-url"
+          >
+          </iframe>
+        </div>
+
+        <p>
+          <span class="bold-text"> Hosted by:</span>
+          {{ userEvent.createdByUser }}
+          <button
+            *ngIf="user.id == userEvent.createdBy"
+            (click)="DeleteEvent()"
+          >
+            Delete Event
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

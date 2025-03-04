@@ -1,1 +1,16 @@
-<p>list-event works!</p>
+<div class="card-container">
+  <div
+    class="card"
+    *ngFor="let event of events"
+    [routerLink]="'display-event/' + event.id"
+    [state]="user"
+  >
+    <h3>{{ event.name }}</h3>
+    <img [src]="event.imgUrl" />
+
+    <p>{{ event.location }}</p>
+    <p>
+      {{ event.eventDateTime | date : "MMM d, yyyy hh:mm a" }}
+    </p>
+  </div>
+</div>

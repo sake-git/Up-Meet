@@ -1,0 +1,74 @@
+img {
+  width: 400px;
+  height: 300px;
+  display: block;
+}
+.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.container {
+  height: 90vh;
+  background-color: rgb(119, 160, 170);
+}
+.main {
+  margin: 5px;
+  text-align: center;
+  border-top: 2px solid black;
+}
+
+.main div {
+  margin: 5px;
+  text-align: justify;
+  padding: 5px;
+}
+
+.bold-text {
+  font-weight: bolder;
+}
+
+.heart {
+  background-color: rgb(223, 215, 215);
+  display: inline-block;
+  height: 20px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 20px;
+}
+.heart:before,
+.heart:after {
+  content: " ";
+  background-color: rgb(223, 215, 215);
+  border-radius: 50%;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+}
+
+.heart:before {
+  top: -12px;
+  left: 0;
+}
+
+.heart:after {
+  left: 12px;
+  top: 0;
+}
+
+.favourite,
+.favourite:before,
+.favourite:after {
+  background-color: red;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: inline;
+  vertical-align: middle;
+  margin: 5px;
+}

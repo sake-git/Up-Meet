@@ -1,0 +1,22 @@
+textarea {
+  height: 50px;
+}
+
+form {
+  width: 500px;
+  margin: auto;
+}
+
+input,
+textarea {
+  width: 250px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+}
+
+.form-container-center {
+  margin: 5px;
+  border-top: 2px solid black;
+}

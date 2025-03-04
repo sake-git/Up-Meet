@@ -19,22 +19,22 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       {
-        path: 'event-list',
+        path: 'list-event',
         component: ListEventComponent,
         canActivate: [authGuard],
       },
       {
-        path: 'event-list/event-display/:id',
+        path: 'list-event/display-event/:id',
         component: DisplayEventComponent,
         canActivate: [authGuard],
       },
       {
-        path: 'favourite/event-display/:id',
+        path: 'favourite/display-event/:id',
         component: DisplayEventComponent,
         canActivate: [authGuard],
       },
       {
-        path: 'event-create',
+        path: 'create-event',
         component: CreateEventComponent,
         canActivate: [authGuard],
       },

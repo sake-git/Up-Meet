@@ -1,1 +1,83 @@
-<p>create-event works!</p>
+<div class="form-container-center">
+  <form [formGroup]="eventForm">
+    <fieldset>
+      <legend>Event Creation</legend>
+      <div>
+        <label><span class="required">*</span>Name</label>
+        <input type="text" formControlName="name" required />
+      </div>
+      <div>
+        <label><span class="required">*</span>Location</label>
+        <input type="text" formControlName="location" required />
+      </div>
+      <div>
+        <label><span class="required">*</span>Event Date</label>
+        <input type="datetime-local" formControlName="eventDateTime" required />
+      </div>
+
+      <div>
+        <label> &nbsp; Image URL</label>
+        <input type="text" formControlName="imgUrl" />
+      </div>
+      <div>
+        <label><span class="required">*</span>Description</label>
+        <textarea formControlName="description" required></textarea>
+      </div>
+      <div>
+        <label> &nbsp; Entry Fee</label>
+        <input type="number" formControlName="price" />
+      </div>
+
+      <div>
+        <label><span class="required">*</span>Duration in mins</label>
+        <input type="number" formControlName="duration" required />
+      </div>
+      <div>
+        <label> &nbsp; Kids Allowed</label>
+        <input type="checkbox" formControlName="kidsAllowed" />
+      </div>
+      <p
+        *ngIf="eventForm.get('name')?.touched && eventForm.get('name')?.errors?.['required'] "
+        class="errors"
+      >
+        Event name is required
+      </p>
+      <p
+        *ngIf="eventForm.get('location')?.touched && eventForm.get('location')?.errors?.['required']"
+        class="errors"
+      >
+        Event location is required
+      </p>
+      <p
+        *ngIf="eventForm.get('eventDateTime')?.touched && eventForm.get('eventDateTime')?.errors?.['required']"
+        class="errors"
+      >
+        Event Date & Time is required
+      </p>
+      <p
+        *ngIf="eventForm.get('description')?.touched && eventForm.get('description')?.errors?.['required']"
+        class="errors"
+      >
+        Event description is required
+      </p>
+      <p
+        *ngIf="eventForm.get('description')?.touched && eventForm.get('description')?.errors?.['maxlength']"
+        class="errors"
+      >
+        Event description can't exceed 500 characters
+      </p>
+      <p
+        *ngIf="eventForm.get('duration')?.touched && eventForm.get('duration')?.errors?.['required']"
+        class="errors"
+      >
+        Event duration is required
+      </p>
+
+      <button type="submit" [disabled]="!eventForm.valid" (click)="SaveEvent()">
+        Save
+      </button>
+      <button type="button" (click)="Cancel()">Cancel</button>
+    </fieldset>
+  </form>
+  <p>{{ errorMessage }}</p>
+</div>
