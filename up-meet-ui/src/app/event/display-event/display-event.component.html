@@ -22,33 +22,10 @@
         </p>
         <p>
           <span class="bold-text"> Entry charges: </span>
-          {{ userEvent.price | currency : "USD" }}
+          {{
+            userEvent.price == 0 ? "Free" : (userEvent.price | currency : "USD")
+          }}
         </p>
-        <a
-          target="_blank"
-          href="https://www.facebook.com/sharer/sharer.php?u={{
-            currentlink
-          }}&amp;src=sdkpreparse"
-          ><img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtBILdC5ouxGYjeaYJPmVqMsSpsItocXSI5A&s"
-            alt="fb"
-            title="Share event on Facebook"
-            class="logo"
-        /></a>
-        <a
-          href="https://twitter.com/intent/tweet?text=Check this out{{
-            currentlink
-          }}"
-          target="_blank"
-          ><img
-            src="https://i0.wp.com/static01.nyt.com/images/2014/08/10/magazine/10wmt/10wmt-superJumbo-v4.jpg?ssl=1"
-            alt="tweet"
-            title="Share event on Twitter"
-            class="logo"
-        /></a>
-        <a href="https://www.ticketmaster.com/" target="_blank">
-          <button>Book</button></a
-        >
       </div>
       <div>
         <p><span class="bold-text">Location:</span> {{ userEvent.location }}</p>
@@ -73,8 +50,33 @@
             *ngIf="user.id == userEvent.createdBy"
             (click)="DeleteEvent()"
           >
-            Delete Event
-          </button>
+            Delete Event</button
+          ><br />
+          <a
+            target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u={{
+              currentlink
+            }}&amp;src=sdkpreparse"
+            ><img
+              src="https://cdn.jim-nielsen.com/ios/512/facebook-2019-05-21.png?rf=1024"
+              alt="fb"
+              title="Share event on Facebook"
+              class="logo"
+          /></a>
+          <a
+            href="https://twitter.com/intent/tweet?text=Check this out{{
+              currentlink
+            }}"
+            target="_blank"
+            ><img
+              src="https://i0.wp.com/static01.nyt.com/images/2014/08/10/magazine/10wmt/10wmt-superJumbo-v4.jpg?ssl=1"
+              alt="tweet"
+              title="Share event on Twitter"
+              class="logo"
+          /></a>
+          <a href="https://www.ticketmaster.com/" target="_blank">
+            <button>Book</button></a
+          >
         </p>
       </div>
     </div>

@@ -3,7 +3,6 @@
     class="card"
     *ngFor="let event of events"
     [routerLink]="'display-event/' + event.id"
-    [state]="user"
   >
     <img [src]="event.imgUrl" />
     <p>{{ event.name }}</p>

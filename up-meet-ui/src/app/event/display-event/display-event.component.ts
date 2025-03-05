@@ -25,7 +25,7 @@ export class DisplayEventComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = history.state;
+    this.user = JSON.parse(localStorage.getItem('user')!);
     this.currentlink = location.href;
     console.log('Event Display User info: ', this.user.id);
     let id = 0;
@@ -88,7 +88,7 @@ export class DisplayEventComponent implements OnInit {
     this.apiService.deleteEvent(this.user.id, this.userEvent.id).subscribe({
       next: (data) => {
         console.log('Event deleted');
-        this.router.navigateByUrl('home/list-event', { state: this.user });
+        this.router.navigateByUrl('home/list-event');
       },
       error: (error) => {
         console.log(error.error);
@@ -96,6 +96,6 @@ export class DisplayEventComponent implements OnInit {
     });
   }
   Cancel() {
-    this.router.navigateByUrl('home/list-event', { state: this.user });
+    this.router.navigateByUrl('home/list-event');
   }
 }

@@ -41,11 +41,10 @@ export const routes: Routes = [
       {
         path: 'favourite',
         component: FavouriteEventsComponent,
-        canActivate: [authGuard],
       },
       { path: '**', component: PageNotFoundComponent },
     ],
   },
-
+  { path: '**', component: PageNotFoundComponent },
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using up_meet_api.DTOs;
 using up_meet_api.Entities;
@@ -32,8 +33,9 @@ namespace up_meet_api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents()
         {
-            List<EventDto> eventsDto = await this._context.Events.Include(x => x.CreatedByNavigation).Select(data =>
-
+            List<EventDto> eventsDto = await this._context.Events
+                .Include(x => x.CreatedByNavigation)
+                .Select(data =>
                 new EventDto()
                 {
                     Id = data.Id,
@@ -64,8 +66,10 @@ namespace up_meet_api.Controllers
         public async Task<ActionResult<EventDto>> GetEvent(int eventId, int userId)
         {
             //Get the event and related favourite list
-            Event userEvent = await _context.Events.Include(x => x.CreatedByNavigation)
-                 .ThenInclude(x => x.FavouriteEvents).FirstOrDefaultAsync(data => data.Id == eventId); 
+            Event? userEvent = await _context.Events
+                .Include(x => x.CreatedByNavigation) // users
+                .Include(x=> x.FavouriteEvents.Where(data=> data.UserId == userId))//favouriteEvents
+                .Where(data => data.Id == eventId).FirstOrDefaultAsync();
 
             // Event userEvent = await _context.Events.FirstOrDefaultAsync(data => data.Id == id);
 
@@ -74,26 +78,26 @@ namespace up_meet_api.Controllers
                 //Event not found error out
                 return NotFound($"Event with id {eventId} not found");
             }
-
+                                
             //Event found. Create a DTO object and send the data
-            EventDto eventDto = new EventDto()
-            {
-                Id = userEvent.Id,
-                Location = userEvent.Location,
-                Name = userEvent.Name,
-                EventDateTime = userEvent.EventDateTime,
-                ImgUrl = userEvent.ImgUrl,
-                Description = userEvent.Description,
-                Price = userEvent.Price,
-                KidsAllowed = userEvent.KidsAllowed,
-                Duration = userEvent.Duration,
-                CreatedBy = userEvent.CreatedBy,
-                CreatedByUser = userEvent.CreatedByNavigation.LoginId,
-                //Check if this is user's favourite event            
-                isFavourite = userEvent.FavouriteEvents?.Where(x => x.UserId == userId).ToList().Count != 0 ? true : false
-            };
+              EventDto eventDto = new EventDto()
+              {
+                  Id = userEvent.Id,
+                  Location = userEvent.Location,
+                  Name = userEvent.Name,
+                  EventDateTime = userEvent.EventDateTime,
+                  ImgUrl = userEvent.ImgUrl,
+                  Description = userEvent.Description,
+                  Price = userEvent.Price,
+                  KidsAllowed = userEvent.KidsAllowed,
+                  Duration = userEvent.Duration,
+                  CreatedBy = userEvent.CreatedBy,
+                  CreatedByUser = userEvent.CreatedByNavigation.LoginId,
+                  //Check if this is user's favourite event            
+                  isFavourite = userEvent.FavouriteEvents?.ToList().Count != 0 ? true : false
+              };
 
-            return Ok(eventDto);
+              return Ok(eventDto);            
         }
 
         //Create event
@@ -134,7 +138,7 @@ namespace up_meet_api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteEvent(int userId, int eventId)
         {
-            Event userEvent = await _context.Events.FindAsync(eventId);
+            Event? userEvent = await _context.Events.FindAsync(eventId);
 
             if (userEvent == null)
             {
@@ -163,7 +167,7 @@ namespace up_meet_api.Controllers
             return NoContent();
         }
 
-
+/*
         // PUT: api/Events/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -199,7 +203,7 @@ namespace up_meet_api.Controllers
         {
             return _context.Events.Any(e => e.Id == id);
         }
-
+*/
        
     }
 }

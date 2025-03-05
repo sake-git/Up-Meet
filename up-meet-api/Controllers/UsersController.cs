@@ -100,7 +100,9 @@ namespace up_meet_api.Controllers
         {
             this._logger.LogInformation("Authenticate User called");
             byte[] password = EncryptPassowrd(userDto.Password);
-            User user = _context.Users.Where(data => data.LoginId.ToLower() == userDto.LoginId.ToLower() && data.Password.SequenceEqual(password)).FirstOrDefault();
+            User? user = await _context.Users
+                .Where(data => data.LoginId.ToLower() == userDto.LoginId.ToLower() && data.Password.SequenceEqual(password))
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {

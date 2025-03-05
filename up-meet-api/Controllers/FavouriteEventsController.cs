@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,14 +51,19 @@ namespace up_meet_api.Controllers
         public async Task<ActionResult<IEnumerable<EventDto>>> GetFavouriteEventList(int id)
         {
             //Get list of favourite items  
-            List<FavouriteEvent> listFavEvents = _context.FavouriteEvents.Where(data =>
-               data.UserId == id).ToList();            
+            List<FavouriteEvent> listFavEvents = _context.FavouriteEvents
+                .Where(data => data.UserId == id)
+                .ToList();            
 
             //Convert favourite item to list of eventDto and send it as response
             List<EventDto> listFavEventsDto = new List<EventDto>();
             listFavEvents.ForEach(data =>
             {
-                Event userEvent = _context.Events.Include(x => x.CreatedByNavigation).Where(evnt => evnt.Id == data.EventId).FirstOrDefault();
+                Event? userEvent = _context.Events
+                                   .Include(x => x.CreatedByNavigation)
+                                   .Where(evnt => evnt.Id == data.EventId)
+                                   .FirstOrDefault();
+
                 _logger.LogInformation(userEvent.ToString());
                 listFavEventsDto.Add(new EventDto()
                 {
@@ -90,6 +96,17 @@ namespace up_meet_api.Controllers
         {
             _logger.LogInformation($"UserId: {obj.UserId} EventId: {obj.EventId}");
 
+            //Check if item is already in favourites
+            var existingFavoriteEvent = _context.FavouriteEvents
+                                        .Where(data => data.EventId == obj.EventId && data.UserId == obj.UserId)
+                                        .FirstOrDefault();
+            if (existingFavoriteEvent != null)
+            {
+                // return it
+                return Ok(existingFavoriteEvent);
+            }
+
+            //Not in favourite, add it
             FavouriteEvent favouriteEvent = new FavouriteEvent()
             {
                 EventId = obj.EventId,
@@ -111,7 +128,9 @@ namespace up_meet_api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteFavouriteEvent(int userId, int eventId)
         {
-            var favouriteEvent = _context.FavouriteEvents.Where(data => data.UserId == userId && data.EventId == eventId).FirstOrDefault();
+            var favouriteEvent = _context.FavouriteEvents
+                                .Where(data => data.UserId == userId && data.EventId == eventId)
+                                .FirstOrDefault();
             if (favouriteEvent == null)
             {
                 return NotFound("Favourite item not found");

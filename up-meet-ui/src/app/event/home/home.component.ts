@@ -28,9 +28,9 @@ export class HomeComponent {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.user = history.state;
+    this.user = JSON.parse(localStorage.getItem('user')!);
     console.log('in home', this.user);
-    this.router.navigateByUrl('/home/list-event', { state: this.user });
+    this.router.navigateByUrl('home/list-event');
   }
 
   Logout() {

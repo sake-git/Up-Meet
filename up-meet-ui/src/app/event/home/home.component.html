@@ -1,17 +1,12 @@
 <div class="container">
   <a
     routerLink="list-event"
-    [state]="user"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
     >Home</a
   >
-  <a routerLink="create-event" [state]="user" routerLinkActive="active"
-    >Create Event</a
-  >
-  <a routerLink="favourite" [state]="user" routerLinkActive="active"
-    >Favorites</a
-  >
+  <a routerLink="create-event" routerLinkActive="active">Create Event</a>
+  <a routerLink="favourite" routerLinkActive="active">Favorites</a>
   <a routerLink="login" (click)="Logout()">Logout</a>
   <router-outlet></router-outlet>
 </div>

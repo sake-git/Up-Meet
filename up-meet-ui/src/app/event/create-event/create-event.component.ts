@@ -53,7 +53,7 @@ export class CreateEventComponent {
   }
 
   ngOnInit(): void {
-    this.user = history.state;
+    this.user = JSON.parse(localStorage.getItem('user')!); //history.state;
     console.log('Event Creation User info: ', this.user);
   }
 
@@ -63,7 +63,7 @@ export class CreateEventComponent {
     this.userEvent.createdBy = this.user!.id;
     this.apiService.createEvents(this.userEvent).subscribe({
       next: (data: any) => {
-        this.router.navigateByUrl('home/list-event', { state: this.user });
+        this.router.navigateByUrl('home/list-event');
         console.log('Event added');
       },
       error: (error) => {
@@ -74,6 +74,6 @@ export class CreateEventComponent {
   }
 
   Cancel() {
-    this.router.navigateByUrl('home/list-event', { state: this.user });
+    this.router.navigateByUrl('home/list-event');
   }
 }

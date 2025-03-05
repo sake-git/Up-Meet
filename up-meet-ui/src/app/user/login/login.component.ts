@@ -22,18 +22,19 @@ export class LoginComponent {
 
   errorMessage = '';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {
+    localStorage.setItem('user', '');
+  }
 
   userLogin(loginForm: NgForm) {
     console.log('User login called');
     this.apiService.getUser(this.user).subscribe({
       next: (data: any) => {
         this.user = data;
+        localStorage.setItem('user', JSON.stringify(this.user));
         localStorage.setItem('myToken', this.user.loginId!);
         console.log('Data:', this.user);
-        this.router.navigateByUrl('/home', {
-          state: this.user,
-        });
+        this.router.navigateByUrl('/home');
       },
       error: (error) => {
         console.log(error);

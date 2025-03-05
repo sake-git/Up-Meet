@@ -27,7 +27,7 @@ export class ListEventComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = history.state;
+    this.user = JSON.parse(localStorage.getItem('user')!); //history.state;
 
     console.log('Event Creation User info: ', this.user);
 

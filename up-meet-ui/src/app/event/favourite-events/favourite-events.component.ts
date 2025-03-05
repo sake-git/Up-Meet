@@ -27,7 +27,7 @@ export class FavouriteEventsComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user = history.state;
+    this.user = JSON.parse(localStorage.getItem('user')!);
     console.log('Event List Favourite User info: ', this.user);
 
     this.apiService.getFavouriteEvents(this.user.id).subscribe({
