@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './services/auth.guard';
 import { ListEventComponent } from './event/list-events/list-event.component';
 import { DisplayEventComponent } from './event/display-event/display-event.component';
 import { FavouriteEventsComponent } from './event/favourite-events/favourite-events.component';

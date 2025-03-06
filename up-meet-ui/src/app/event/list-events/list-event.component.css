@@ -1,0 +1,9 @@
+.card-container {
+  border-top: none;
+}
+
+.main {
+  border-top: 2px solid black;
+  margin: 8px;
+  padding: 5px;
+}

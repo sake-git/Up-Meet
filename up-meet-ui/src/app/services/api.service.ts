@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserEvent } from '../model/event';
 
@@ -37,9 +37,11 @@ export class ApiService {
   }
 
   //Get Event list
-  getEvents(id: number): Observable<UserEvent[]> {
+  getEvents(location: string, date: string): Observable<UserEvent[]> {
     console.log('Get events service called');
-    return this.http.get<UserEvent[]>(`${this.baseUrl}/Events`);
+    return this.http.get<UserEvent[]>(
+      `${this.baseUrl}/Events/All/${date}/${location}`
+    );
   }
 
   //Get favourite events for given user

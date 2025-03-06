@@ -12,3 +12,25 @@ a:hover {
   border-radius: 15px;
   color: black;
 }
+
+.right {
+  position: absolute;
+  right: 2%;
+  margin: 0px 10px;
+  padding: 0px;
+}
+
+.greet {
+  position: absolute;
+  color: rgb(5, 74, 12);
+
+  font-size: larger;
+  left: 45%;
+}
+
+@media only screen and (max-width: 500px) {
+  .right,
+  .greet {
+    position: relative;
+  }
+}

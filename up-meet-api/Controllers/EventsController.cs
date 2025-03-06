@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -31,13 +32,27 @@ namespace up_meet_api.Controllers
         //Get all events
         // GET: api/Events
         
-        [HttpGet]       
+        [HttpGet("All/{date?}/{location?}")]       
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents(string date = "", string location ="")
         {
+            DateTime dateTime = DateTime.Now.Date;
+            if(date != "")
+            {
+                string newDate;
+                while ((newDate = Uri.UnescapeDataString(date)) != date)
+                    date = newDate;
+                dateTime = DateTime.ParseExact(newDate, "d", null);
+            }
+            
+                     
+
+            _logger.LogInformation($"location: {location} , Date: {date} , DateTime = { dateTime.ToString()}");
+
             List<EventDto> eventsDto = await this._context.Events
                 .Include(x => x.CreatedByNavigation)
+                .Where(data => data.EventDateTime >= dateTime && (location =="" || data.Location.ToLower().Contains(location.ToLower())))
                 .Select(data =>
                 new EventDto()
                 {

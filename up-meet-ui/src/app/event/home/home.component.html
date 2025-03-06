@@ -7,6 +7,8 @@
   >
   <a routerLink="create-event" routerLinkActive="active">Create Event</a>
   <a routerLink="favourite" routerLinkActive="active">Favorites</a>
-  <a routerLink="login" (click)="Logout()">Logout</a>
+
+  <a class="right" routerLink="login" (click)="Logout()">Logout</a>
+  <span class="greet"> Hello {{ user.loginId }}!</span>
   <router-outlet></router-outlet>
 </div>
