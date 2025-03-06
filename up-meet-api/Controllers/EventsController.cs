@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
@@ -13,6 +14,7 @@ using up_meet_api.Entities;
 
 namespace up_meet_api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EventsController : ControllerBase
@@ -28,7 +30,8 @@ namespace up_meet_api.Controllers
 
         //Get all events
         // GET: api/Events
-        [HttpGet]        
+        
+        [HttpGet]       
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<EventDto>>> GetEvents()

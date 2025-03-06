@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using up_meet_api.Entities;
 using System.Security.Cryptography;
 using up_meet_api.DTOs;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace up_meet_api.Controllers
 {
@@ -18,11 +21,13 @@ namespace up_meet_api.Controllers
     {
         private readonly EventDbContext _context;
         private ILogger<UsersController> _logger;
+        private readonly IConfiguration _config;
 
-        public UsersController(EventDbContext context, ILogger<UsersController> logger)
+        public UsersController(EventDbContext context, ILogger<UsersController> logger, IConfiguration config)
         {
             _context = context;
             _logger = logger;
+            _config = config;
         }
 
         
@@ -117,7 +122,8 @@ namespace up_meet_api.Controllers
                 Email = user.Email,
                 Name = user.Name
             };
-            // userDto.Token = GenerateToken(userDto);
+            
+            userDto.Token = GenerateToken(userDto);
             return Ok(userDto);
         }
 
@@ -137,6 +143,25 @@ namespace up_meet_api.Controllers
             return hashvalue;
         }
 
+
+        private string GenerateToken(UserDto userDto)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier,userDto.Name),
+                new Claim(ClaimTypes.Role,userDto.LoginId)
+            };
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(15),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+        }
 
         /*
                 // GET: api/Users

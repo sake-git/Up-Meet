@@ -32,7 +32,7 @@ export class LoginComponent {
       next: (data: any) => {
         this.user = data;
         localStorage.setItem('user', JSON.stringify(this.user));
-        localStorage.setItem('myToken', this.user.loginId!);
+        localStorage.setItem('myToken', this.user.token!);
         console.log('Data:', this.user);
         this.router.navigateByUrl('/home');
       },
