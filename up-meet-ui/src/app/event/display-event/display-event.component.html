@@ -11,6 +11,12 @@
           [ngClass]="{ favourite: userEvent.isFavourite }"
           title="Add to favourite"
         ></span>
+        <span *ngIf="addedVisible" [ngClass]="{ added: addedVisible }"
+          >Added to Favorites</span
+        >
+        <span *ngIf="removedVisible" [ngClass]="{ added: removedVisible }"
+          >Removed from Favorites</span
+        >
         <p class="bold-text">Details:</p>
         <p>{{ userEvent.description }}</p>
         <p>

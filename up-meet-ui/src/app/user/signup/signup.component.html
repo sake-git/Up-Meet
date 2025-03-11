@@ -25,7 +25,13 @@
       </div>
       <div>
         <label> &nbsp; Phone</label>
-        <input type="text" [(ngModel)]="user.phone" name="phone" phone />
+        <input
+          type="text"
+          [(ngModel)]="user.phone"
+          name="phone"
+          #phone="ngModel"
+          pattern="[0-9]{10}"
+        />
       </div>
       <div>
         <label><span class="required">*</span>Login Id</label>
@@ -83,6 +89,14 @@
           "
       >
         Invalid email id
+      </p>
+      <p
+        class="errors"
+        *ngIf="
+            (phone.touched ) && phone.errors?.['pattern']
+          "
+      >
+        Invalid Phone number
       </p>
 
       <p

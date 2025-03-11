@@ -17,6 +17,8 @@ export class DisplayEventComponent implements OnInit {
   errorMessage = '';
   url: any;
   currentlink = '';
+  addedVisible = false;
+  removedVisible = false;
   constructor(
     private apiService: ApiService,
     public router: Router,
@@ -64,6 +66,8 @@ export class DisplayEventComponent implements OnInit {
           next: (next) => {
             console.log('Removed from Favourites');
             this.userEvent.isFavourite = false;
+            this.removedVisible = true;
+            //  this.addedVisible = false;
           },
         });
     } else {
@@ -73,12 +77,17 @@ export class DisplayEventComponent implements OnInit {
           next: (data) => {
             console.log('Added Successfully');
             this.userEvent.isFavourite = true;
+            this.addedVisible = true;
+            // this.removedVisible = false;
           },
           error: (error) => {
             console.log(error.error);
           },
         });
     }
+
+    this.addedVisible = false;
+    this.removedVisible = false;
   }
   DeleteEvent() {
     console.log('delete event called');

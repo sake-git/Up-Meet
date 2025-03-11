@@ -78,3 +78,24 @@ img {
   display: inline-block;
   width: 50%;
 }
+
+.added,
+.removed {
+  visibility: hidden;
+  animation: makeVisible;
+  animation-duration: 3s;
+  animation-timing-function: ease-in;
+}
+
+@keyframes makeVisible {
+  from {
+    visibility: hidden;
+    opacity: 0.7;
+    color: rgb(6, 119, 51);
+  }
+  to {
+    visibility: visible;
+    opacity: 0;
+    color: black;
+  }
+}
