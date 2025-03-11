@@ -5,6 +5,8 @@ import { ApiService } from '../../services/api.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { isValidDate } from 'rxjs/internal/util/isDate';
+import moment from 'moment';
 
 @Component({
   selector: 'app-list-event',
@@ -22,11 +24,9 @@ export class ListEventComponent implements OnInit {
   };
 
   events: UserEvent[] = [];
-
-  eventDate = new Date().toLocaleDateString();
+  eventDate = moment(new Date()).format('MM/DD/YYYY');
   location = '';
-
-  errorMessage = '';
+  isDateValid = true;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -34,23 +34,28 @@ export class ListEventComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user')!); //history.state;
 
     console.log('Event Creation User info: ', this.user);
-
     this.getEvents();
   }
 
   getEvents() {
     console.log('Event Creation User info: ', this.user);
 
-    this.apiService
-      .getEvents(this.location, encodeURIComponent(this.eventDate))
-      .subscribe({
-        next: (data: UserEvent[]) => {
-          this.events = data;
-        },
-        error: (error) => {
-          this.errorMessage = error?.error;
-        },
-      });
+    if (this.isDateValid) {
+      this.apiService
+        .getEvents(this.location, encodeURIComponent(this.eventDate))
+        .subscribe({
+          next: (data: UserEvent[]) => {
+            this.events = data;
+          },
+          error: (error) => {
+            console.log(error?.error);
+          },
+        });
+    }
+  }
+
+  validateDate() {
+    this.isDateValid = moment(this.eventDate, 'MM/DD/YYYY', true).isValid();
   }
 
   Cancel() {

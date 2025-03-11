@@ -146,12 +146,13 @@ namespace up_meet_api.Controllers
 
         private string GenerateToken(UserDto userDto)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,userDto.Name),
-                new Claim(ClaimTypes.Role,userDto.LoginId)
+                new Claim("Name",userDto.Name),
+                new Claim("LoginId",userDto.LoginId),
+                new Claim("Email",userDto.Email)
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],

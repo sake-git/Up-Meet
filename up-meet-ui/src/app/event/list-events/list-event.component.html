@@ -3,8 +3,14 @@
     <label for="location">Location</label>
     <input name="location" [(ngModel)]="location" />
     <label for="location">Date</label>
-    <input type="text" name="location" [(ngModel)]="eventDate" />
-    <button (click)="getEvents()">Search</button>
+    <input
+      type="text"
+      name="location"
+      [(ngModel)]="eventDate"
+      (blur)="validateDate()"
+    />
+    <button (click)="getEvents()" [disabled]="!isDateValid">Search</button>
+    <p *ngIf="!isDateValid" class="errors">Date is invalid</p>
   </div>
   <div class="card-container">
     <div

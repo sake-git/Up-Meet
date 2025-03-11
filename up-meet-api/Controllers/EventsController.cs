@@ -42,11 +42,13 @@ namespace up_meet_api.Controllers
             {
                 string newDate;
                 while ((newDate = Uri.UnescapeDataString(date)) != date)
+                {
+                    _logger.LogInformation("Date Inescaped: ", date);
                     date = newDate;
+                }
                 dateTime = DateTime.ParseExact(newDate, "d", null);
             }
-            
-                     
+                                 
 
             _logger.LogInformation($"location: {location} , Date: {date} , DateTime = { dateTime.ToString()}");
 

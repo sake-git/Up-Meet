@@ -7,3 +7,8 @@
   margin: 8px;
   padding: 5px;
 }
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+}

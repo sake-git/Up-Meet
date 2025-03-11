@@ -3,7 +3,7 @@
     <h2>{{ userEvent.name }}</h2>
 
     <div class="display-flex">
-      <div>
+      <div class="display-inline-block">
         <img [src]="userEvent.imgUrl" />
         <span
           (click)="UpdateFavorite()"
@@ -75,7 +75,7 @@
               class="logo"
           /></a>
           <a href="https://www.ticketmaster.com/" target="_blank">
-            <button>Book</button></a
+            <button>Get Tickets</button></a
           >
         </p>
       </div>

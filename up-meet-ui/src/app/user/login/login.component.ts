@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { User } from '../../model/user';
 import { ApiService } from '../../services/api.service';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -22,8 +22,16 @@ export class LoginComponent {
 
   errorMessage = '';
 
-  constructor(private apiService: ApiService, private router: Router) {
-    localStorage.setItem('user', '');
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
+  ) {
+    localStorage.removeItem('user');
+    localStorage.removeItem('myToken');
+    this.activeRoute.params.subscribe((params) => {
+      this.errorMessage = params['error'];
+    });
   }
 
   userLogin(loginForm: NgForm) {
