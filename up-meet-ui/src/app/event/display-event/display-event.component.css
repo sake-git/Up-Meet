@@ -12,6 +12,7 @@ img {
   height: 100vh;
   background-color: rgb(119, 160, 170);
   overflow: auto;
+  position: relative;
 }
 .main {
   margin: 5px;
@@ -86,11 +87,24 @@ img {
   animation-duration: 3s;
   animation-timing-function: ease-in;
 }
+.dialog {
+  display: inline-block;
+  position: fixed;
+  z-index: 102;
+  width: 20%;
+  left: 40%;
+  top: 300px;
+  background-color: rgb(137, 168, 198);
+  text-align: center;
+  align-items: center;
+  border: 2px solid black;
+  padding: 10px;
+}
 
 @keyframes makeVisible {
   from {
     visibility: hidden;
-    opacity: 0.7;
+    opacity: 1;
     color: rgb(6, 119, 51);
   }
   to {
@@ -98,4 +112,25 @@ img {
     opacity: 0;
     color: black;
   }
+}
+
+button {
+  width: 100px;
+  background-color: rgb(172, 178, 201);
+}
+
+button:hover {
+  background-color: rgb(119, 160, 170);
+}
+
+.overlay {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 100;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }

@@ -38,6 +38,9 @@
       >
         Password is required
       </p>
+      <p *ngIf="message" class="success">
+        {{ message }}
+      </p>
       <p *ngIf="errorMessage" class="errors">
         {{ errorMessage }}
       </p>

@@ -28,7 +28,11 @@ export class SignupComponent {
     var message = this.apiService.createUser(this.user).subscribe({
       next: (data) => {
         console.log('User created successfully', data);
-        this.router.navigateByUrl('/login');
+
+        this.router.navigate([
+          '/login',
+          { success: 'User created successfully' },
+        ]);
       },
       error: (error) => {
         this.errorMessage = error.error;

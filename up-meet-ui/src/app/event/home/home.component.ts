@@ -35,6 +35,6 @@ export class HomeComponent {
 
   Logout() {
     localStorage.removeItem('myToken');
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['/login', { success: 'Logged out successfully' }]);
   }
 }

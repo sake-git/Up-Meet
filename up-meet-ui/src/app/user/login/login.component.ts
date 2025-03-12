@@ -21,6 +21,7 @@ export class LoginComponent {
   };
 
   errorMessage = '';
+  message = '';
 
   constructor(
     private apiService: ApiService,
@@ -31,6 +32,7 @@ export class LoginComponent {
     localStorage.removeItem('myToken');
     this.activeRoute.params.subscribe((params) => {
       this.errorMessage = params['error'];
+      this.message = params['success'];
     });
   }
 
@@ -55,5 +57,7 @@ export class LoginComponent {
   Cancel(loginForm: NgForm) {
     console.log('cancel called');
     loginForm.reset();
+    this.message = '';
+    this.errorMessage = '';
   }
 }

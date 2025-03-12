@@ -19,6 +19,8 @@ export class DisplayEventComponent implements OnInit {
   currentlink = '';
   addedVisible = false;
   removedVisible = false;
+  displayMessage = false;
+  deleteClick = false;
   constructor(
     private apiService: ApiService,
     public router: Router,
@@ -89,21 +91,33 @@ export class DisplayEventComponent implements OnInit {
     this.addedVisible = false;
     this.removedVisible = false;
   }
+  ConfirmDelete() {
+    this.deleteClick = true;
+  }
+
+  CloseDialog() {
+    this.displayMessage = false;
+    this.router.navigateByUrl('home/list-event');
+  }
+
   DeleteEvent() {
-    console.log('delete event called');
-    if (!confirm('Are you sure to delete the event')) {
-      return;
-    }
     this.apiService.deleteEvent(this.user.id, this.userEvent.id).subscribe({
       next: (data) => {
         console.log('Event deleted');
-        this.router.navigateByUrl('home/list-event');
+        this.deleteClick = false;
+        this.displayMessage = true;
+        // this.router.navigateByUrl('home/list-event');
       },
       error: (error) => {
         console.log(error.error);
       },
     });
   }
+
+  CancelDelete() {
+    this.deleteClick = false;
+  }
+
   Cancel() {
     this.router.navigateByUrl('home/list-event');
   }

@@ -46,6 +46,12 @@ form div {
   padding: 2px;
 }
 
+.success {
+  font-size: small;
+  color: rgb(6, 64, 15);
+  padding: 2px;
+}
+
 .form-container-center {
   height: 70vh;
   width: 100vw;

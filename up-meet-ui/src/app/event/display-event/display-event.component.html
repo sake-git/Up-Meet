@@ -1,7 +1,6 @@
 <div class="container">
   <div class="main">
     <h2>{{ userEvent.name }}</h2>
-
     <div class="display-flex">
       <div class="display-inline-block">
         <img [src]="userEvent.imgUrl" />
@@ -54,7 +53,7 @@
           {{ userEvent.createdByUser }}
           <button
             *ngIf="user.id == userEvent.createdBy"
-            (click)="DeleteEvent()"
+            (click)="ConfirmDelete()"
           >
             Delete Event</button
           ><br />
@@ -87,4 +86,14 @@
       </div>
     </div>
   </div>
+  <div *ngIf="displayMessage" class="dialog">
+    <p>User Deleted</p>
+    <button (click)="CloseDialog()">OK</button>
+  </div>
+  <div *ngIf="deleteClick" class="dialog">
+    <p>Please confirm you want to delete this event?</p>
+    <button (click)="DeleteEvent()">OK</button>
+    <button (click)="CancelDelete()">Cancel</button>
+  </div>
+  <div *ngIf="deleteClick || displayMessage" class="overlay"></div>
 </div>
