@@ -30,7 +30,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user')!);
     console.log('in home', this.user);
-    this.router.navigateByUrl('home/list-event');
+    this.router.navigateByUrl('/home/list-event');
   }
 
   Logout() {
